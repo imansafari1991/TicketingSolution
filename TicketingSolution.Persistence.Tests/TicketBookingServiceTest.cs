@@ -44,4 +44,31 @@ public class TicketBookingServiceTest
 
 
     }
+
+    [Fact]
+    public void Should_Save_Ticket_Booking()
+    {
+        //Arrange
+
+        var dbOptions = new DbContextOptionsBuilder<TicketingSolutionDbContext>()
+            .UseInMemoryDatabase("ShouldSaveTest", b => b.EnableNullChecks(false))
+            .Options;
+
+        var ticketBooking = new TicketBooking { TicketID = 1, Date = new DateTime(2022, 07, 22) };
+
+        //Act 
+        using var context = new TicketingSolutionDbContext(dbOptions);
+        var ticketBookingService = new TicketBookingService(context);
+        ticketBookingService.Save(ticketBooking);
+
+        //Assert 
+        var bookings = context.TicketBookings.ToList();
+        var booking = Assert.Single(bookings); // only be one
+
+        Assert.Equal(ticketBooking.Date,booking.Date);
+        Assert.Equal(ticketBooking.TicketID,booking.TicketID);
+
+
+
+    }
 }

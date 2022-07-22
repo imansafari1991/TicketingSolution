@@ -26,6 +26,7 @@ public class TicketBookingService : ITicketBookingService
 
     public void Save(TicketBooking ticketBooking)
     {
-        throw new NotImplementedException();
+        _context.Add(ticketBooking);
+        _context.SaveChanges();
     }
 }
