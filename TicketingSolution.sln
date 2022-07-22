@@ -11,7 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketingSolution.Domain", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketingSolution.Persistence", "TicketingSolution.Persistence\TicketingSolution.Persistence.csproj", "{E8CA1FF7-5509-4720-A1BC-C2EBE655C373}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketingSolution.Persistence.Tests", "TicketingSolution.Persistence.Tests\TicketingSolution.Persistence.Tests.csproj", "{0E12895E-A3C9-4E41-97E0-9586C434DD37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketingSolution.Persistence.Tests", "TicketingSolution.Persistence.Tests\TicketingSolution.Persistence.Tests.csproj", "{0E12895E-A3C9-4E41-97E0-9586C434DD37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketingSolution.API", "TicketingSolution.API\TicketingSolution.API.csproj", "{48843FCD-AEF4-4DA3-BC1D-996820528750}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketingSolution.API.Test", "TicketingSolution.API.Test\TicketingSolution.API.Test.csproj", "{4D8CAEDE-4A9F-40C3-A378-FF104FEAA2A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,14 @@ Global
 		{0E12895E-A3C9-4E41-97E0-9586C434DD37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E12895E-A3C9-4E41-97E0-9586C434DD37}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E12895E-A3C9-4E41-97E0-9586C434DD37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48843FCD-AEF4-4DA3-BC1D-996820528750}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48843FCD-AEF4-4DA3-BC1D-996820528750}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48843FCD-AEF4-4DA3-BC1D-996820528750}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48843FCD-AEF4-4DA3-BC1D-996820528750}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D8CAEDE-4A9F-40C3-A378-FF104FEAA2A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D8CAEDE-4A9F-40C3-A378-FF104FEAA2A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D8CAEDE-4A9F-40C3-A378-FF104FEAA2A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D8CAEDE-4A9F-40C3-A378-FF104FEAA2A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
