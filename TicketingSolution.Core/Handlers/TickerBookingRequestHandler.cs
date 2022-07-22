@@ -4,52 +4,51 @@ using TicketingSolution.Core.Enums;
 using TicketingSolution.Core.Models;
 using TicketingSolution.Domain;
 
-namespace TicketingSolution.Core.Handlers
+namespace TicketingSolution.Core.Handlers;
+
+public class TickerBookingRequestHandler: ITickerBookingRequestHandler
 {
-    public class TickerBookingRequestHandler
+    private readonly ITicketBookingService _ticketBookingService;
+    public TickerBookingRequestHandler(ITicketBookingService ticketBookingService)
     {
-        private readonly ITicketBookingService _ticketBookingService;
-        public TickerBookingRequestHandler(ITicketBookingService ticketBookingService)
+        _ticketBookingService = ticketBookingService;
+    }
+
+    public ServiceBookingResult BookService(TicketBookingRequest bookingRequest)
+    {
+        if (bookingRequest is null)
         {
-            _ticketBookingService = ticketBookingService;
+            throw new ArgumentNullException("request");
         }
 
-        public ServiceBookingResult BookService(TicketBookingRequest bookingRequest)
+        var availabeTickets = _ticketBookingService.GetAvailabeTickets(bookingRequest.Date);
+        var result = CreateTicketBookingObject<ServiceBookingResult>(bookingRequest);
+        if (availabeTickets.Any())
         {
-            if (bookingRequest is null)
-            {
-                throw new ArgumentNullException("request");
-            }
+            var Ticket = availabeTickets.First();
+            var TicketBooking = CreateTicketBookingObject<TicketBooking>(bookingRequest);
+            TicketBooking.TicketID = Ticket.Id;
+            _ticketBookingService.Save(TicketBooking);
+            result.TicketBookingId = TicketBooking.TicketID;
+            result.Flag = BookingResultFlag.Success;
 
-            var availabeTickets = _ticketBookingService.GetAvailabeTickets(bookingRequest.Date);
-            var result= CreateTicketBookingObject<ServiceBookingResult>(bookingRequest);
-            if (availabeTickets.Any())
-            {
-                var Ticket = availabeTickets.First();
-                var TicketBooking = CreateTicketBookingObject<TicketBooking>(bookingRequest);
-                TicketBooking.TicketID = Ticket.Id;
-                _ticketBookingService.Save(TicketBooking);
-                result.TicketBookingId = TicketBooking.TicketID;
-                result.Flag = BookingResultFlag.Success;
-
-            }
-            else
-            {
-                result.Flag = BookingResultFlag.Failure;
-            }
-            return result;
         }
-
-
-        private static TTicketBooking CreateTicketBookingObject<TTicketBooking>(TicketBookingRequest bookingRequest) where TTicketBooking :
-            ServiceBookingBase, new()
+        else
         {
-            return new TTicketBooking
-            {
-                Name = bookingRequest.Name,
-                Family = bookingRequest.Family,
-                Email = bookingRequest.Email
-            };
+            result.Flag = BookingResultFlag.Failure;
         }
+        return result;
+    }
+
+
+    private static TTicketBooking CreateTicketBookingObject<TTicketBooking>(TicketBookingRequest bookingRequest) where TTicketBooking :
+        ServiceBookingBase, new()
+    {
+        return new TTicketBooking
+        {
+            Name = bookingRequest.Name,
+            Family = bookingRequest.Family,
+            Email = bookingRequest.Email
+        };
     }
 }

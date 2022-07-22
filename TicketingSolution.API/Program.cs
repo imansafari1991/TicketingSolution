@@ -1,5 +1,6 @@
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using TicketingSolution.Core.Handlers;
 using TicketingSolution.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +18,7 @@ builder.Services.AddDbContext<TicketingSolutionDbContext>(opt => opt.UseSqlite(c
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<ITickerBookingRequestHandler, TickerBookingRequestHandler>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
